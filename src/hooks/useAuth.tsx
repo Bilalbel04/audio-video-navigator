@@ -3,7 +3,7 @@ import { useState, useEffect, createContext, useContext, ReactNode } from 'react
 import { supabase } from '@/lib/supabase';
 import { User, Session } from '@supabase/supabase-js';
 import { useNavigate } from 'react-router-dom';
-import { toast } from '@/components/ui/sonner';
+import { toast } from 'sonner';
 
 type AuthContextType = {
   user: User | null;
@@ -81,8 +81,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signOut = async () => {
     try {
-      const { error } = await supabase.auth;
-      await supabase.auth.signOut();
+      const { error } = await supabase.auth.signOut();
       if (error) throw error;
       navigate('/login');
       toast.success('Sesión cerrada');
